@@ -1,0 +1,11 @@
+{
+    "name": "gameshelf",
+    "version": "1.0.0",
+    "description": "Video game catalogue PWA (HSC Software Engineering AT1)",
+    "main": "server.js",
+    "scripts": {"start": "node server.js"},
+    "dependencies": {
+        "better-sqlite3": "^11.0.0",
+        "express": "^4.19.2"
+    }
+}
