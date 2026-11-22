@@ -1,2 +1,5 @@
 node_modules/
 games.db
+games.db-shm
+games.db-wal
+.DS_Store
