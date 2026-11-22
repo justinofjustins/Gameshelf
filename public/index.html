@@ -1,29 +1,20 @@
 <!DOCTYPE html>
-<html lang="en"></html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GameShelf</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1c1a38">
+  <title>GameShelf</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icon-192.png">
 </head>
 <body>
-<header>
+  <header>
     <h1>GameShelf</h1>
-    <p id="count">Loading your games…</p>
+    <p id="count">Loading your games...</p>
     <span id="status" role="status"></span>
     <button id="install" hidden>Install app</button>
-</header>
-<main>
-    <section aria-labelledby="addh">
-        <h2 id="addh">Add a game</h2>
-        <form id="add">
-            <label>Title <input name="title" required maxlength="80"></label>
-            <label>Genre <select name="genre" class="genres" required></select>
-</label>
-    <label>Platform <select name="platform" class="platforms" required>
-    </select></label>
-        <label></label>Release year <input name="year" type="number" min="1970" max="2027" required></label>
-        <label>Rating (1-10) <input name="rating" type="number" min="1" max="10" required></label>
-        <label>Notes <textarea name="notes" maxlength="300" rows="2"> </textarea></label>
         <button type="submit">Add to shelf</button>
         <p id="msg" role="alert"></p>
     <form>
