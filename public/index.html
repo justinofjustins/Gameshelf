@@ -15,13 +15,99 @@
     <p id="count">Loading your games...</p>
     <span id="status" role="status"></span>
     <button id="install" hidden>Install app</button>
+  </header>
+
+  <main>
+    <section aria-labelledby="add-heading">
+      <h2 id="add-heading">Add a game</h2>
+      <form id="add">
+        <label>
+          Title
+          <input name="title" required maxlength="80" placeholder="Game title">
+        </label>
+
+        <label>
+          Genre
+          <select name="genre" class="genres" required></select>
+        </label>
+
+        <label>
+          Platform
+          <select name="platform" class="platforms" required></select>
+        </label>
+
+        <label>
+          Release year
+          <input name="year" type="number" min="1970" required>
+        </label>
+
+        <label>
+          Rating (1-10)
+          <input name="rating" type="number" min="1" max="10" step="1" required>
+        </label>
+
+        <label>
+          Notes
+          <textarea name="notes" maxlength="300" rows="2" placeholder="Optional notes"></textarea>
+        </label>
+
         <button type="submit">Add to shelf</button>
         <p id="msg" role="alert"></p>
-    <form>
-    </section> 
-    <section aria-labelledby="findh">
-        <h2 id="findh">Find games</h2>
-<form id="filters">
-    
-</form>
+      </form>
     </section>
+
+    <section aria-labelledby="find-heading">
+      <h2 id="find-heading">Find games</h2>
+      <form id="filters">
+        <label>
+          Search
+          <input name="q" type="search" placeholder="Title or notes">
+        </label>
+
+        <label>
+          Genre
+          <select name="genre" class="genres">
+            <option value="">Any</option>
+          </select>
+        </label>
+
+        <label>
+          Platform
+          <select name="platform" class="platforms">
+            <option value="">Any</option>
+          </select>
+        </label>
+
+        <label>
+          Minimum rating
+          <select name="minRating">
+            <option value="">Any</option>
+            <option value="5">5 or higher</option>
+            <option value="7">7 or higher</option>
+            <option value="9">9 or higher</option>
+          </select>
+        </label>
+
+        <label>
+          Sort by
+          <select name="sort">
+            <option value="title">Title A-Z</option>
+            <option value="rating">Highest rated</option>
+            <option value="year">Newest release</option>
+            <option value="newest">Recently added</option>
+          </select>
+        </label>
+
+        <label class="check">
+          <input type="checkbox" name="favourite" value="1">
+          Favourites only
+        </label>
+      </form>
+
+      <div id="list" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>

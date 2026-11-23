@@ -132,6 +132,60 @@ function validateGame(game) {
 }   
 
 //add one new game 
-app.post('/api/games', (req,res) => {
-    const game = req.body && type of req.body === 'object' ? req.body : {};
-}
+app.post('/api/games', (req, res) => {
+  const game = req.body && typeof req.body === 'object' ? req.body : {};
+  const error = validateGame(game);
+
+  if (error) {
+    return res.status(400).json({ error });
+  }
+
+  const title = game.title.trim();
+  const notes = typeof game.notes === 'string' ? game.notes.trim() : '';
+  const result = db.prepare(`
+    INSERT INTO games (title, genre, platform, year, rating, notes)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `).run(title, game.genre, game.platform, Number(game.year), Number(game.rating), notes);
+
+  const newGame = db.prepare('SELECT * FROM games WHERE id = ?').get(result.lastInsertRowid);
+  res.status(201).json(newGame);
+});
+
+//switch a game favourite value between 0 and 1 
+app.put('/api/games/:id/favourite', (req,res) => {
+  const id = Number(req.params.id);
+
+  if (!Number.isInteger(id) || id < 1) {
+    return res.status(404).json({ error: 'Game not found.' });
+  }
+
+  const result = db.prepare('UPDATE games SET favourite = 1 - favourite WHERE id = ?').run(id);
+  if (result.changes === 0) {
+    return res.status(404).json({ error: 'Game not found.' });
+  }
+
+  const updatedGame = db.prepare('SELECT * FROM games WHERE id = ?').get(id);
+  res.json(updatedGame);
+}); 
+
+//delete remove one game from database 
+app.delete('/api/games/:id', (req, res) => {
+  const id = Number(req.params.id); 
+  
+  if (!Number.isInteger(id) || id < 1) {
+    return res.status(404).json({ error: 'Game not found.' });
+  }
+
+  const result = db.prepare('DELETE FROM games WHERE id = ?').run(id);
+  if (result.changes === 0) {
+    return res.status(404).json({ error: 'Game not found.' });
+  }
+
+  res.status(204).end();
+}); 
+
+//start server 
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`GameShelf is running at http://localhost:${PORT}`);
+});
