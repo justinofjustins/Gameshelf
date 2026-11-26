@@ -1,0 +1,23 @@
+{
+  "name": "GameShelf",
+  "short_name": "GameShelf",
+  "description": "Catalogue, search and rate your video games.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ece9f5",
+  "theme_color": "#1c1a38",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

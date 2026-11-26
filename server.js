@@ -10,7 +10,7 @@ const db = new Database(path.join(__dirname, 'games.db'));
 app.use(express.json({ limit: '10kb' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Create the games table the first time the app starts.
+//create the games table the first time the app starts.
 db.exec(`
   CREATE TABLE IF NOT EXISTS games (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,7 +24,7 @@ db.exec(`
   )
 `);
 
-// Add five starter games only when the table is empty.
+//add five starter games only when the table is empty.
 const gameCount = db.prepare('SELECT COUNT(*) AS count FROM games').get().count;
 if (gameCount === 0) {
   const addStarterGame = db.prepare(`
@@ -45,14 +45,14 @@ const starterGames = [
   }
 }
 
-// These lists are the only genres and platforms users can choose.
+//these lists are the only genres and platforms users can choose.
 const GENRES = [
   'Action', 'Platformer', 'RPG', 'Sandbox', 'Racing',
   'Sports', 'Puzzle', 'Shooter', 'Strategy', 'Horror'
 ];
 const PLATFORMS = ['PC', 'PS5', 'Xbox', 'Switch', 'Mobile'];
 
-// A sort whitelist makes sure user input is never added directly to SQL.
+//sort whitelist makes sure user input is never added directly to SQL.
 const SORTS = {
   title: 'title COLLATE NOCASE ASC',
   rating: 'rating DESC, title COLLATE NOCASE ASC',
@@ -93,7 +93,7 @@ app.get ('/api/games', (req, res) => {
     sql += ' AND favourite = 1';
     }
 
-    const safeSort = Object.prototype.hasOwnProperty.call(SORTS, sort)
+    const safeSort = Object.prototype.hasOwnProperties.call(SORTS, sort)
     ? SORTS[sort]
     : SORTS.title;
   sql += ` ORDER BY ${safeSort}`;
